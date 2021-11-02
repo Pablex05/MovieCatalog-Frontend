@@ -49,16 +49,12 @@ class Login extends React.Component{
         let url= Apiurl + "login"
         axios.post(url,this.state.form)
             .then( response=>{
+
                 console.log(response);
                 localStorage.setItem("token",response.data.token);
                     this.props.history.push("/homepage");
                     })
-
         }
-
-
-
-
 
     clickRegister=()=>{
         this.props.history.push("/register")

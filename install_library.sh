@@ -11,6 +11,7 @@ echo "instalamos librerias"
 npm install yet
 nvm install 16.13.0
 nvm use 16.13.0
+npm install --save react-native
 npm install --save bootstrap
 npm install --save react-router-dom
 npm install --save axios

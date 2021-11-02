@@ -1,38 +1,52 @@
 import React from 'react';
-import axios from "axios";
-
 import Header from '../template/Header'
-import {Apiurl} from "../services/apirest";
-
+import ImagePage from "../assetss/img/home/fondo-de-pantalla.jpg";
+import ImagePageWelcome from "../assetss/img/home/imagen-bienvenida.png"
+import axios from 'axios';
+import '../assetss/css/Login.css';
 
 class HomePage extends React.Component{
 
-    state = {
-        pacientes:[]
+    clickActor=()=>{
+        this.props.history.push("/actor")
+    }
+    clickDirector=()=>{
+        this.props.history.push("/director")
+    }
+    clickMovie=()=>{
+        this.props.history.push("/movie")
     }
 
-    clickPaciente(id){
-        this.props.history.push("/editar/"+ id)
+    manejadorSubmit=e=>{
+        e.preventDefault();
     }
-    componentDidMount(){
-        let url = Apiurl + "pacientes?page=1";
-        axios.get(url)
-        .then(response =>{
-            this.setState({
-                pacientes:response.data
+    constructor(props){
+        super(props);
+    }
 
-            })
-        })
-    }
 
     render() {
         return(
             <React.Fragment>
-                <Header>
-                    <button type="submit" className="btn btn-primary" style={{marginRight: "10px"}} onClick={()=>this.put()}>Editar</button>
-                    <button type="submit" className="btn btn-danger" style={{marginRight: "10px"}} onClick={()=>this.delete()}>Eliminar</button>
-                </Header>
+                <Header></Header>
+                <body background={ImagePage}>
 
+                <div class="flex-xl-column" align="center" >
+                    <div class="container-fluid">
+                        <div align="center" >
+
+                <img src={ImagePageWelcome} class="img-thumbnail" style={{marginTop: "15%", alignSelf:"center"}}/>
+                <div class="flex-xl-column">
+                    <br/>
+                    <button type="submit" className="btn btn-primary" style={{marginRight: "2%"}} onClick={()=>this.clickActor()}>Actores</button>
+                    <button type="submit" className="btn btn-primary" style={{marginRight: "2%"}} onClick={()=>this.clickDirector()}>Directores</button>
+                    <button type="submit" className="btn btn-primary" style={{marginRight: "2%"}} onClick={()=>this.clickMovie()}>Movies</button>
+
+                </div>
+                </div>
+                    </div>
+                </div>
+                </body>
             </React.Fragment>
         );
     }
