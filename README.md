@@ -28,4 +28,4 @@ frontend que emplea React, que consume una API usando axios
 1. ingresamos adentro de la carpeta del proyecto
 2. abrimos la terminal y ponemos el siguiente comando
 
-### npm start
+#### npm start
