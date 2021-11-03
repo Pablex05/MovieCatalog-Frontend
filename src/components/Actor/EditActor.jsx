@@ -10,9 +10,8 @@ class EditActor extends React.Component{
     state = {
         form: {
             "Name" : "",
-        },
-        error:false,
-        errorMsg: ""
+        }
+
     }
 
     manejadorChange = async e=>{
@@ -25,9 +24,31 @@ class EditActor extends React.Component{
         })
         console.log(this.state.form);
     }
-    
+
     manejadorSubmit=e=>{
         e.preventDefault();
+    }
+
+    put =()=>{
+        let id = this.props.match.params.id;
+        let url = Apiurl + "actor/edit/"+id;
+        axios.put(url, this.state.form)
+            .then(response=>{
+                console.log(response)
+                this.props.history.push("/actor");
+            })
+    }
+
+    delete =()=>{
+        let id = this.props.match.params.id;
+        let url = Apiurl + "actor/delete/"+id;
+        let datos = {
+            "id": id
+        }
+        axios.delete(url, {headers:datos})
+            .then(response=>{
+                this.props.history.push("/actor");
+            })
     }
 
     componentDidMount(){
@@ -71,7 +92,7 @@ class EditActor extends React.Component{
                         <br/><br/>
                         <button type="submit" className="btn btn-primary" style={{marginRight: "10px"}} onClick={()=>this.put()}>Editar</button>
                         <button type="submit" className="btn btn-danger" style={{marginRight: "10px"}} onClick={()=>this.delete()}>Eliminar</button>
-                        <a className="btn btn-dark" href="/dashboard">Salir</a>
+                        <a className="btn btn-dark" href="/actor">Salir</a>
                     </form>
                 </div>
 

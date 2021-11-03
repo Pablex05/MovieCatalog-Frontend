@@ -57,7 +57,7 @@ class Actor extends React.Component{
     }
 
     clickList(id){
-        this.props.history.push("/actor/edit/" +id)
+        this.props.history.push("/actor/Edit/" +id)
     }
 
     render() {

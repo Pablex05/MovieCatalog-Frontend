@@ -21,7 +21,7 @@ function App() {
                   <Route path="/actor" exact render={props => (<Actor {...props}/>)}></Route>
                   <Route path="/director" exact render={props => (<Director {...props}/>)}></Route>
                   <Route path="/movie" exact render={props => (<Movie {...props}/>)}></Route>
-                  <Route path="/actor/edit/:id" exact render={props => (<EditActor {...props}/>)}></Route>
+                  <Route path="/actor/Edit/:id" exact render={props => (<EditActor {...props}/>)}></Route>
 
               </Switch>
           </Router>
