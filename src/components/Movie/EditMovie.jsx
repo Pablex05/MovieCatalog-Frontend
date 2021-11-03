@@ -6,7 +6,7 @@ import {Apiurl} from "../../services/apirest";
 import axios from "axios";
 
 
-class Director extends React.Component{
+class EditMovie extends React.Component{
 
     //ponemos el contructor para poder usar los props
     constructor(props){
@@ -17,15 +17,14 @@ class Director extends React.Component{
         form: {
             "Title": "",
             "Genre": "",
-            "Release Date": "",
+            "Release_Date": "",
             "Duration": "",
             "Trailer": "",
             "Language": "",
             "Subtitle": "",
             "Cast": [],
             "Director": ""
-        },
-        lists: []
+        }
     }
 
     manejadorChange = async e=>{
@@ -33,104 +32,147 @@ class Director extends React.Component{
         await this.setState({
             form:{
                 ...this.state.form,
-                [e.target.name]: e.target.value,
+
+                [e.target.name]: e.target.value
             }
         })
+        //console.log(this.state.form);
     }
 
     manejadorSubmit=e=>{
         e.preventDefault();
     }
 
-    manejadorButton=()=>{
-        let url = Apiurl + "movie/add/"
-        axios.post(url, this.state.form)
-            .then(response =>{
+    put =()=>{
+        let id = this.props.match.params.id;
+        let url = Apiurl + "movie/edit/"+id;
+        axios.put(url, this.state.form)
+            .then(response=>{
                 console.log(response)
+                this.props.history.push("/movie");
+            })
+    }
+
+    delete =()=>{
+        let id = this.props.match.params.id;
+        let url = Apiurl + "movie/delete/"+id;
+        let datos = {
+            "id": id
+        }
+        axios.delete(url, {headers:datos})
+            .then(response=>{
+                this.props.history.push("/movie");
             })
     }
 
     componentDidMount(){
-        let url = Apiurl + "actor/getAll";
+        let id = this.props.match.params.id;
+        let url = Apiurl + 'movie/getById/'+id;
+        console.log(url)
         axios.get(url)
             .then(response =>{
                 this.setState({
-                    lists:response.data
-
+                    form:{
+                        Title: response.data.Title,
+                        Genre: response.data.Genre,
+                        Release_Date: response.data.Release_Date,
+                        Duration: response.data.Duration,
+                        Trailer: response.data.Trailer,
+                        Language: response.data.Language,
+                        Subtitle: response.data.Subtitle,
+                        Cast: response.data.Cast,
+                        Director: response.data.Director,
+                    }
                 })
                 console.log(response)
             })
     }
 
-    clickList(id){
-        this.props.history.push("/actor/Edit/" +id)
-    }
+
+
 
     render() {
         return(
             <React.Fragment>
                 <Header></Header>
-                <body background={ImagePage}>
+                 <body background={ImagePage}>
                 <div class="flex-xl-column" align="center" >
-                    <div className="container-xl">
-                        <div align="center" >
-
-                            <br/><br/><br/><br/><br/>
-                            <h3 style={{backgroundColor:"black", color:"white"}}>Agregar Nuevo Actor</h3>
-                            <form onSubmit={this.manejadorSubmit}>
-                                <input type="text" className="fadeIn second" name="Name" placeholder="Name" onChange={this.manejadorChange}/>
-                                <input type="submit" className="fadeIn fourth" value="Aceptar" onClick={this.manejadorButton}/>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-                <div className="container-xl">
-                    <div class="row-cols-2" align="center">
-                        <br/>
-                        <h3 style={{backgroundColor:"black", color:"white"}}>Lista Actores</h3>
-                        <table class="table table-dark">
-                            <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Genre</th>
-                                <th scope="col">Release Date</th>
-                                <th scope="col">Duration</th>
-                                <th scope="col">Trailer</th>
-                                <th scope="col">Cast</th>
-                                <th scope="col">Director</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.state.lists.map((value, index) =>{
-                                value.Release_Date = 'Release Date';
-                                return(
-                                    <tr key={index} onClick={()=>this.clickList(value.id)}>
-                                        <td>{value.id}</td>
-                                        <td>{value.Title}</td>
-                                        <td>{value.Genre+""}</td>
-                                        <td>{value.Release_Date}</td>
-                                        <td>{value.Duration}</td>
-                                        <td>{value.Trailer}</td>
-                                        <td>{value.Language}</td>
-                                        <td>{value.Subtitle}</td>
-                                        <td>{value.Cast+""}</td>
-                                        <td>{value.Director}</td>
-
+                <div className="row-cols">
+                    <div align="center" >
+                        <br/><br/><br/>
+                        <h3 style={{backgroundColor:"black", color:"white"}}>Editar Pelicula</h3>
+                        <form onSubmit={this.manejadorSubmit}>
+                            <table align="center">
+                                <td>
+                                    <tr>
+                                        <input className="fadeIn second" name="Title" placeholder="Title" type="text"
+                                               value={this.state.form.Title}
+                                               onChange={this.manejadorChange}
+                                        />
                                     </tr>
-                                )
-                            })}
-
-                            </tbody>
-                        </table>
-
+                                    <tr>
+                                        <input className="fadeIn second" name="Genre" placeholder="Genre" type="text"
+                                               value={this.state.form.Genre}
+                                               onChange={this.manejadorChange}
+                                        />
+                                    </tr>
+                                    <tr>
+                                        <input className="fadeIn second" name="Release_Date" placeholder="Release_Date" type="text"
+                                               value={this.state.form.Release_Date}
+                                               onChange={this.manejadorChange}
+                                        />
+                                    </tr>
+                                    <tr>
+                                        <input className="fadeIn second" name="Duration" placeholder="Duration" type="text"
+                                               value={this.state.form.Duration}
+                                               onChange={this.manejadorChange}
+                                        />
+                                    </tr>
+                                </td>
+                                <td>
+                                    <tr>
+                                        <input className="fadeIn second" name="Trailer" placeholder="Trailer" type="text"
+                                               value={this.state.form.Trailer}
+                                               onChange={this.manejadorChange}
+                                        />
+                                    </tr>
+                                    <tr>
+                                        <input className="fadeIn second" name="Language" placeholder="Language" type="text"
+                                               value={this.state.form.Language}
+                                               onChange={this.manejadorChange}
+                                        />
+                                    </tr>
+                                    <tr>
+                                        <input className="fadeIn second" name="Subtitle" placeholder="Subtitle" type="text"
+                                               value={this.state.form.Subtitle}
+                                               onChange={this.manejadorChange}
+                                        />
+                                    </tr>
+                                    <tr>
+                                        <input className="fadeIn second" name="Cast" placeholder="Cast" type="text"
+                                               value={this.state.form.Cast}
+                                               onChange={this.manejadorChange}
+                                        />
+                                    </tr>
+                                    <tr>
+                                        <input className="fadeIn second" name="Director" placeholder="Director" type="text"
+                                               value={this.state.form.Director}
+                                               onChange={this.manejadorChange}
+                                        />
+                                    </tr>
+                                </td>
+                            </table>
+                            <button type="submit" className="btn btn-primary" style={{marginRight: "10px"}} onClick={()=>this.put()}>Editar</button>
+                            <button type="submit" className="btn btn-danger" style={{marginRight: "10px"}} onClick={()=>this.delete()}>Eliminar</button>
+                            <a className="btn btn-dark" href="/movie">Salir</a>
+                        </form>
                     </div>
                 </div>
-                </body>
-            </React.Fragment>
+            </div>
+            </body>
+        </React.Fragment>
         );
     }
 }
 
-export default Director
+export default EditMovie

@@ -5,8 +5,6 @@ import ImagePage from "../../assetss/img/home/fondo-de-pantalla.jpg";
 import {Apiurl} from "../../services/apirest";
 import axios from "axios";
 
-
-
 class Actor extends React.Component{
 
     //ponemos el contructor para poder usar los props

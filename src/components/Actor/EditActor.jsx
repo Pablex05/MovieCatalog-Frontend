@@ -78,22 +78,20 @@ class EditActor extends React.Component{
                 </div>
                 <div className="container">
                     <form className="form-horizontal" onSubmit={this.manejadorSubmit}>
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <label className="col-md-2 control-label"></label>
-                                <div className="col-md-10">
+                        <div className="flex-xl-column" align="center">
+                            <div className="row-cols">
+                                <div align="center">
                                     <input className="form-control" name="Name" placeholder="Name" type="text"
                                            value={this.state.form.Name}
                                            onChange={this.manejadorChange}
                                     />
                                 </div>
+                                <button type="submit" className="btn btn-primary" style={{marginRight: "10px"}} onClick={()=>this.put()}>Editar</button>
+                                <button type="submit" className="btn btn-danger" style={{marginRight: "10px"}} onClick={()=>this.delete()}>Eliminar</button>
+                                <a className="btn btn-dark" href="/actor">Salir</a>
                             </div>
                         </div>
-
                         <br/>
-                        <button type="submit" className="btn btn-primary" style={{marginRight: "10px"}} onClick={()=>this.put()}>Editar</button>
-                        <button type="submit" className="btn btn-danger" style={{marginRight: "10px"}} onClick={()=>this.delete()}>Eliminar</button>
-                        <a className="btn btn-dark" href="/actor">Salir</a>
                     </form>
                 </div>
                 </body>

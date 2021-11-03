@@ -11,8 +11,7 @@ import Movie from './components/Movie/Movie';
 import EditActor from './components/Actor/EditActor'
 import EditDirector from "./components/Director/EditDirector";
 import EditMovie from "./components/Movie/EditMovie";
-
-
+import AddMovie from "./components/Movie/AddMovie";
 
 function App() {
   return (
@@ -26,6 +25,7 @@ function App() {
                   <Route path="/director/Edit/:id" exact render={props => (<EditDirector {...props}/>)}></Route>
                   <Route path="/movie" exact render={props => (<Movie {...props}/>)}></Route>
                   <Route path="/movie/Edit/:id" exact render={props => (<EditMovie {...props}/>)}></Route>
+                  <Route path="/movie/Add" exact render={props => (<AddMovie {...props}/>)}></Route>
 
               </Switch>
           </Router>

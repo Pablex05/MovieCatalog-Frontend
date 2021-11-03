@@ -11,102 +11,90 @@ class Movie extends React.Component{
         form: {
             "Title": "",
             "Genre": "",
-            "Release Date": "",
+            "Release_Date": "",
             "Duration": "",
             "Trailer": "",
             "Language": "",
             "Subtitle": "",
-            "Cast": [],
+            "Cast":[],
             "Director": ""
-        }
-    }
-
-    manejadorChange = async e=>{
-        //asigna un valor a una variable del estado
-        await this.setState({
-            form:{
-                ...this.state.form,
-                [e.target.name]: e.target.value
-            }
-        })
-        console.log(this.state.form);
+        },
+        lists: []
     }
 
     manejadorSubmit=e=>{
         e.preventDefault();
     }
 
-    put =()=>{
-        let id = this.props.match.params.id;
-        let url = Apiurl + "actor/edit/"+id;
-        axios.put(url, this.state.form)
-            .then(response=>{
-                console.log(response)
-                this.props.history.push("/actor");
-            })
-    }
-
-    delete =()=>{
-        let id = this.props.match.params.id;
-        let url = Apiurl + "actor/delete/"+id;
-        let datos = {
-            "id": id
-        }
-        axios.delete(url, {headers:datos})
-            .then(response=>{
-                this.props.history.push("/actor");
-            })
-    }
-
     componentDidMount(){
-        let id = this.props.match.params.id;
-        let url = Apiurl + 'actor/getById/'+id;
-        console.log(url)
+        let url = Apiurl + "movie/getAll";
         axios.get(url)
             .then(response =>{
                 this.setState({
-                    form:{
-                        Name: response.data.Name,
-                    }
+                    lists:response.data,
                 })
                 console.log(response)
             })
     }
 
-    render() {
+    clickList(id){
+        this.props.history.push("/movie/Edit/" +id)
+    }
 
+    render() {
         return(
             <React.Fragment>
                 <Header></Header>
                 <body background={ImagePage}>
                 <div className="container">
-                    <br/>
-                    <h3 style={{color:"#067791FF"}} align="center">Editar Actor</h3>
-                </div>
-                <div className="container">
-                    <form className="form-horizontal" onSubmit={this.manejadorSubmit}>
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <label className="col-md-2 control-label"></label>
-                                <div className="col-md-10">
-                                    <input className="form-control" name="Name" placeholder="Name" type="text"
-                                           value={this.state.form.Name}
-                                           onChange={this.manejadorChange}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row-cols-2" align="center">
+                        <br/><br/><br/><br/><br/>
+                        <h3 style={{backgroundColor:"black", color:"white"}}>Lista Peliculas</h3>
 
-                        <br/>
-                        <button type="submit" className="btn btn-primary" style={{marginRight: "10px"}} onClick={()=>this.put()}>Editar</button>
-                        <button type="submit" className="btn btn-danger" style={{marginRight: "10px"}} onClick={()=>this.delete()}>Eliminar</button>
-                        <a className="btn btn-dark" href="/actor">Salir</a>
-                    </form>
+                        <table class="table table-dark">
+                            <thead>
+                            <a className="btn btn-primary" href="/movie/Add">Agregar Movie</a>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Genero</th>
+                                <th scope="col">Release Date</th>
+                                <th scope="col">Duracion</th>
+                                <th scope="col">Trailer</th>
+                                <th scope="col">Idioma</th>
+                                <th scope="col">Subtitulo</th>
+                                <th scope="col">Actores</th>
+                                <th scope="col">Director</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {this.state.lists.map((value, index) =>{
+                                return(
+                                    <tr key={index} onClick={()=>this.clickList(value.id)}>
+                                        <td>{value.id}</td>
+                                        <td>{value.Title}</td>
+                                        <td>{value.Genre+""}</td>
+                                        <td>{value.Release_Date}</td>
+                                        <td>{value.Duration}</td>
+                                        <td>{value.Trailer}</td>
+                                        <td>{value.Language}</td>
+                                        <td>{value.Subtitle}</td>
+                                        <td>{value.Cast+""}</td>
+                                        <td>{value.Director}</td>
+                                    </tr>
+                                )
+                            })}
+
+                            </tbody>
+                        </table>
+
+                    </div>
                 </div>
                 </body>
             </React.Fragment>
         );
     }
+
 }
 
 export default Movie
