@@ -30,5 +30,5 @@ frontend que emplea React, que consume una API usando axios
 
 #### npm start
 
-#Aclaraciones
+# Aclaraciones
 la rama frontend-sin-JWT es la rama que esta terminada, la que tiene JWT se tiene que arreglar la forma de como se optiene el token y poder consumir la API con el con la API 
