@@ -8,13 +8,13 @@ import '../assetss/css/Login.css';
 class HomePage extends React.Component{
 
     clickActor=()=>{
-        this.props.history.push("/actor")
+        this.props.history.push("/actor/")
     }
     clickDirector=()=>{
-        this.props.history.push("/director")
+        this.props.history.push("/director/")
     }
     clickMovie=()=>{
-        this.props.history.push("/movie")
+        this.props.history.push("/movie/")
     }
 
     manejadorSubmit=e=>{
@@ -35,7 +35,7 @@ class HomePage extends React.Component{
                     <div class="container-fluid">
                         <div align="center" >
 
-                <img src={ImagePageWelcome} class="img-thumbnail" style={{marginTop: "15%", alignSelf:"center"}}/>
+                <img src={ImagePageWelcome} class="img-thumbnail" style={{marginTop: "9%", alignSelf:"center"}}/>
                 <div class="flex-xl-column">
                     <br/>
                     <button type="submit" className="btn btn-primary" style={{marginRight: "2%"}} onClick={()=>this.clickActor()}>Actores</button>

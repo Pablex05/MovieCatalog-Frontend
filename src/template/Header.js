@@ -13,10 +13,12 @@ class Header extends React.Component{
 
     render() {
         return(
+            <div className="container" align="left">
             <nav className="navbar navbar-dark bg-dark fixed-top">
-                <a className="navbar-brand" href="/homepage"> <img src={logo} width="200px" alt="User Icon" href="/homepage" width="10%" height="10%" style={{marginLeft:"2%"}}/> prePelis</a>
-                <a className="btn btn-primary" href="/register" style={{marginRight:"2%"}}> Register</a>
-            </nav>
+                <a className="navbar-brand" href="/"> <img src={logo} width="200px" alt="User Icon" href="/" width="10%" height="10%" style={{marginLeft:"2%"}}/> prePelis</a>
+                </nav>
+                <br/><br/><br/>
+            </div>
         );
     }
 }
