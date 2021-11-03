@@ -8,7 +8,6 @@ import axios from "axios";
 
 class Director extends React.Component{
 
-
     //ponemos el contructor para poder usar los props
     constructor(props){
         super(props);
@@ -16,8 +15,15 @@ class Director extends React.Component{
 
     state = {
         form: {
-            'Name': "",
-            'Movie': []
+            "Title": "",
+            "Genre": "",
+            "Release Date": "",
+            "Duration": "",
+            "Trailer": "",
+            "Language": "",
+            "Subtitle": "",
+            "Cast": [],
+            "Director": ""
         },
         lists: []
     }
@@ -37,27 +43,27 @@ class Director extends React.Component{
     }
 
     manejadorButton=()=>{
-        let url = Apiurl + "director/add/"
+        let url = Apiurl + "movie/add/"
         axios.post(url, this.state.form)
             .then(response =>{
                 console.log(response)
-                window.location.href = window.location.href;
             })
     }
 
     componentDidMount(){
-        let url = Apiurl + "director/getAll";
+        let url = Apiurl + "actor/getAll";
         axios.get(url)
             .then(response =>{
                 this.setState({
                     lists:response.data
+
                 })
                 console.log(response)
             })
     }
 
     clickList(id){
-        this.props.history.push("/director/Edit/" +id)
+        this.props.history.push("/actor/Edit/" +id)
     }
 
     render() {
@@ -70,7 +76,7 @@ class Director extends React.Component{
                         <div align="center" >
 
                             <br/><br/><br/><br/><br/>
-                            <h3 style={{backgroundColor:"black", color:"white"}}>Agregar Nuevo Director</h3>
+                            <h3 style={{backgroundColor:"black", color:"white"}}>Agregar Nuevo Actor</h3>
                             <form onSubmit={this.manejadorSubmit}>
                                 <input type="text" className="fadeIn second" name="Name" placeholder="Name" onChange={this.manejadorChange}/>
                                 <input type="submit" className="fadeIn fourth" value="Aceptar" onClick={this.manejadorButton}/>
@@ -82,23 +88,36 @@ class Director extends React.Component{
                 <div className="container-xl">
                     <div class="row-cols-2" align="center">
                         <br/>
-                        <h3 style={{backgroundColor:"black", color:"white"}}>Lista Directores</h3>
+                        <h3 style={{backgroundColor:"black", color:"white"}}>Lista Actores</h3>
                         <table class="table table-dark">
                             <thead>
                             <tr>
                                 <th scope="col">ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Genre</th>
+                                <th scope="col">Release Date</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Trailer</th>
+                                <th scope="col">Cast</th>
                                 <th scope="col">Director</th>
-                                <th scope="col">Peliculas</th>
-
                             </tr>
                             </thead>
                             <tbody>
                             {this.state.lists.map((value, index) =>{
+                                value.Release_Date = 'Release Date';
                                 return(
                                     <tr key={index} onClick={()=>this.clickList(value.id)}>
                                         <td>{value.id}</td>
-                                        <td>{value.Name}</td>
-                                        <td>{value.Movies+""}</td>
+                                        <td>{value.Title}</td>
+                                        <td>{value.Genre+""}</td>
+                                        <td>{value.Release_Date}</td>
+                                        <td>{value.Duration}</td>
+                                        <td>{value.Trailer}</td>
+                                        <td>{value.Language}</td>
+                                        <td>{value.Subtitle}</td>
+                                        <td>{value.Cast+""}</td>
+                                        <td>{value.Director}</td>
+
                                     </tr>
                                 )
                             })}

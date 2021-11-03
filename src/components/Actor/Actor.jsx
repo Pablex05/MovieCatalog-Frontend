@@ -4,7 +4,7 @@ import Header from "../../template/Header";
 import ImagePage from "../../assetss/img/home/fondo-de-pantalla.jpg";
 import {Apiurl} from "../../services/apirest";
 import axios from "axios";
-import {Link} from "react-router-dom";
+
 
 
 class Actor extends React.Component{
@@ -41,6 +41,7 @@ class Actor extends React.Component{
         axios.post(url, this.state.form)
             .then(response =>{
                 console.log(response)
+                window.location.href = window.location.href;
                 })
     }
 

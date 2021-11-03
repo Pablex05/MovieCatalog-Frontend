@@ -11,7 +11,6 @@ class EditActor extends React.Component{
         form: {
             "Name" : "",
         }
-
     }
 
     manejadorChange = async e=>{
@@ -31,29 +30,29 @@ class EditActor extends React.Component{
 
     put =()=>{
         let id = this.props.match.params.id;
-        let url = Apiurl + "actor/edit/"+id;
+        let url = Apiurl + "director/edit/"+id;
         axios.put(url, this.state.form)
             .then(response=>{
                 console.log(response)
-                this.props.history.push("/actor");
+                this.props.history.push("/director");
             })
     }
 
     delete =()=>{
         let id = this.props.match.params.id;
-        let url = Apiurl + "actor/delete/"+id;
+        let url = Apiurl + "director/delete/"+id;
         let datos = {
             "id": id
         }
         axios.delete(url, {headers:datos})
             .then(response=>{
-                this.props.history.push("/actor");
+                this.props.history.push("/director");
             })
     }
 
     componentDidMount(){
         let id = this.props.match.params.id;
-        let url = Apiurl + 'actor/getById/'+id;
+        let url = Apiurl + 'director/getById/'+id;
         console.log(url)
         axios.get(url)
             .then(response =>{
@@ -74,7 +73,7 @@ class EditActor extends React.Component{
                 <body background={ImagePage}>
                 <div className="container">
                     <br/>
-                    <h3 style={{color:"#067791FF"}} align="center">Editar Actor</h3>
+                    <h3 style={{color:"#067791FF"}} align="center">Editar Director</h3>
                 </div>
                 <div className="container">
                     <form className="form-horizontal" onSubmit={this.manejadorSubmit}>
@@ -93,7 +92,7 @@ class EditActor extends React.Component{
                         <br/>
                         <button type="submit" className="btn btn-primary" style={{marginRight: "10px"}} onClick={()=>this.put()}>Editar</button>
                         <button type="submit" className="btn btn-danger" style={{marginRight: "10px"}} onClick={()=>this.delete()}>Eliminar</button>
-                        <a className="btn btn-dark" href="/actor">Salir</a>
+                        <a className="btn btn-dark" href="/director">Salir</a>
                     </form>
                 </div>
                 </body>
