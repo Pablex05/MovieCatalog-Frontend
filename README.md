@@ -1,6 +1,6 @@
 # MovieCatalog-Frontend 
 
-frontend que emplea React, que consume una API usando axios
+frontend que emplea React JS, que consume una API "MovieCatalog-backend" usando axios
 
 ## Preparar el entorno
 
