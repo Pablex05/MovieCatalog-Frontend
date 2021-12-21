@@ -31,4 +31,4 @@ frontend que emplea React JS, que consume una API "MovieCatalog-backend" usando 
 #### npm start
 
 # Aclaraciones
-la rama frontend-sin-JWT es la rama que esta terminada, la que tiene JWT se tiene que arreglar la forma de como se optiene el token y poder consumir la API con el con la API
+la rama frontend-sin-JWT es la rama que esta terminada, la que tiene JWT se tiene que arreglar la forma de como se obtiene el token y poder consumir la API 
